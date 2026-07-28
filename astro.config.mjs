@@ -2,13 +2,17 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: 'https://habitspioneer.com',
+
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en', 'pt'],
     routing: { prefixDefaultLocale: false }, // es → /, en → /en, pt → /pt
   },
+
   integrations: [
     sitemap({
       i18n: {
@@ -17,6 +21,8 @@ export default defineConfig({
       },
     }),
   ],
+
   build: { inlineStylesheets: 'always' },
   compressHTML: true,
+  adapter: cloudflare()
 });
